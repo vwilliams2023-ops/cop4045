@@ -3,57 +3,49 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 while True:
-
-    a = float(input("Enter coefficient a: "))
-    b = float(input("Enter coefficient b: "))
-    c = float(input("Enter coefficient c: "))
+    a_input = input("Enter coefficient a (or press ENTER to exit): ")
+    if a_input == "":
+        break
     
-    discriminant = b**2 - 4*a*c
+    a = float(a_input)
+    b = float(input("Enter b: "))
+    c = float(input("Enter c: "))
     
-    if discriminant > 0:
-        # Two real roots
-        sqrt_disc = math.sqrt(discriminant)
-        x1 = (-b + sqrt_disc) / (2*a)
-        x2 = (-b - sqrt_disc) / (2*a)
-        print(f"\nTwo real roots:")
-        print(f"x1 = {x1:.4f}")
-        print(f"x2 = {x2:.4f}")
-        roots = [x1, x2]
-        
-    elif discriminant == 0:
-        # One real root 
-        x1 = -b / (2*a)
-        print(f"\nOne real root:")
-        print(f"x1 = x2 = {x1:.4f}")
-        roots = [x1]
-        
-    else:
-        # Complex roots
-        real_part = -b / (2*a)
-        imag_part = math.sqrt(abs(discriminant)) / (2*a)
-        print(f"\nComplex roots:")
-        print(f"x1 = {real_part:.4f} + {imag_part:.4f}i")
-        print(f"x2 = {real_part:.4f} - {imag_part:.4f}i")
+    d = b**2 - 4*a*c
+    
+    if d < 0:
+        print("no real solutions")
+        x_center = -b / (2*a)
+        x = np.linspace(x_center - 5, x_center + 5, 150)
         roots = []
-
-
-
+    elif d == 0:
+        x1 = -b / (2*a)
+        print(f"one solution: {x1:.4f}")
+        x = np.linspace(x1 - 3, x1 + 3, 150)
+        roots = [x1]
+    else:
+        sqrt_d = math.sqrt(d)
+        x1 = (-b + sqrt_d) / (2*a)
+        x2 = (-b - sqrt_d) / (2*a)
+        print(f"two solutions: {x1:.4f} and {x2:.4f}")
+        x = np.linspace(min(x1, x2) - 2, max(x1, x2) + 2, 150)
+        roots = [x1, x2]
     
-x = np.linspace(x_min, x_max, 150)
+    y = a * x**2 + b * x + c
     
-   
-y = a * x**2 + b * x + c
+    # --- CREATE PLOT IN NEW WINDOW ---
+    plt.figure()  
     
-plt.plot(x, y, 'b-', linewidth=2)
-plt.axhline(y=0, color='black')  # x-axis
-plt.axvline(x=0, color='black')  # y-axis
-plt.grid(True, alpha=0.3)
-plt.title(f'y = {a}x² + {b}x + {c}')
-plt.xlabel('x')
-plt.ylabel('y')
-plt.show(block=False)
-plt.pause(0.1)
-
-plt.show()
-
-print("\n" + "-"*60)
+    plt.plot(x, y, 'b-', linewidth=2)
+    plt.axhline(0, color='k')
+    plt.axvline(0, color='k')
+    
+    for r in roots:
+        plt.plot(r, 0, 'ro', markersize=8)
+    
+    plt.grid(True, alpha=0.3)
+    plt.title(f'y = {a}x² + {b}x + {c}')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    
+    plt.show()
