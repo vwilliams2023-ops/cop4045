@@ -23,7 +23,6 @@ def plot_function(fun_str, domain, ns):
         print("{:12.4f} | {:12.4f}".format(x, y))
     print()
     
-    # Display the chart with matplotlib.pyplot
     plt.plot(xs, ys)
     plt.xlabel("x")
     plt.ylabel("y")
@@ -32,7 +31,6 @@ def plot_function(fun_str, domain, ns):
     plt.show()
 
 
-# Code to read inputs from terminal and call plot_function
 fun_str = input("Enter function with variable x: ")
 xmin = float(input("Enter xmin: "))
 xmax = float(input("Enter xmax: "))
