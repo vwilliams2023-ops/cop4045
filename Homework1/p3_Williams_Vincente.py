@@ -21,7 +21,6 @@ def find_max_dup(s):
     
     max_dup = ""
     
-    # Try all possible substring lengths from longest to shortest
     for n in range(len(s) - 1, 0, -1):
         result = find_dup_str(s, n)
         if result != "":
