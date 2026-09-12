@@ -1,11 +1,8 @@
 def caesar_cipher(text, shift):
-    """Encrypt text by shifting each letter by shift positions."""
     result = ""
     for char in text:
         if char.isalpha():
-            # Get the base ('a' or 'A') depending on case
             base = ord('a') if char.islower() else ord('A')
-            # Shift within 0-25 using modulo
             new_char = chr((ord(char) - base + shift) % 26 + base)
             result += new_char
         else:
@@ -14,12 +11,11 @@ def caesar_cipher(text, shift):
 
 
 def caesar_decipher(cyphertext, shift):
-    """Decrypt by shifting in the opposite direction."""
+
     return caesar_cipher(cyphertext, -shift)
 
 
 def letter_frequency(text):
-    """Count occurrences of each letter (case-insensitive)."""
     counts = {}
     for char in text.lower():
         if char.isalpha():
