@@ -9,11 +9,9 @@ def caesar_cipher(text, shift):
             result += char
     return result
 
-
 def caesar_decipher(cyphertext, shift):
 
     return caesar_cipher(cyphertext, -shift)
-
 
 def letter_frequency(text):
     counts = {}
@@ -21,7 +19,6 @@ def letter_frequency(text):
         if char.isalpha():
             counts[char] = counts.get(char, 0) + 1
     return counts
-
 
 def main():
     text = ""
@@ -52,7 +49,6 @@ def main():
             break
         else:
             print("Invalid choice.")
-
 
 if __name__ == "__main__":
     main()
