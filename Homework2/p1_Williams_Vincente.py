@@ -1,3 +1,4 @@
+
 def line_number(file1,file2):
     """ Reads file1 line by line, 
     adds numbers and decimals to each line in the file
@@ -66,11 +67,13 @@ def parse_functions(file):
                     if cstrip.endswith('"""'):
                         doc = False
                     continue
-                if cleanline.startswith("def "):
+                if cleanline.startswith(cstrip):
                     if name is not None:
                 #tuples inside a tuple 
                         tuples = tuples + ((startcount,name,arg,string),)
+                        name = None
                 #Text from file stored and put in the tuple
+                if cleanline.startswith("def "):
                     startcount = count
                     string = ""
                     end = cleanline.find("(")
@@ -79,8 +82,9 @@ def parse_functions(file):
                     end = cleanline.find(")")
                     start = cleanline.find("(") + 1
                     arg = cleanline[start:end]
-                string = string + cleanline
-        tuples = tuples + ((startcount,name,arg,string),)
+                string = string + "\n" + cleanline
+        if name is not None:
+            tuples = tuples + ((startcount,name,arg,string),)
         sortedtuple = tuple(sorted(tuples,key=alph))
         return sortedtuple
     
