@@ -1,5 +1,7 @@
 import turtle
 def draw_leaf_straight(rec_lvl,petiole):
+    """sets the starting location, direction and creation 
+    speed of the leaf"""
     turtle.up()
     turtle.goto(0,-500)
     turtle.down()
@@ -10,6 +12,7 @@ def draw_leaf_straight(rec_lvl,petiole):
     var.exitonclick()
 
 def helper(rec_lvl,petiole):
+    """ Recursive function that creates a leaf using turtle """
     if rec_lvl == 0:
         turtle.fd(petiole)
     else:
@@ -25,10 +28,14 @@ def helper(rec_lvl,petiole):
     turtle.back(petiole)
 
 def mapping(number):
+    """maps the possible outputs of the strB function into
+    a single string and returns a character from the list"""
     str="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     return str[number]
 
 def strB(n, base=10):
+    """Recursive function that converts n into a string representation
+    of the given base"""
     if n < base:
         return mapping(n)
     else: 
@@ -51,7 +58,7 @@ def testif(b, testname, msgOK="", msgFailed=""):
         
     return b 
 def main():
-    #draw_leaf_straight(6,120)
+    draw_leaf_straight(6,120)
     testif(strB(1028,16) == "404", "input1028/base16", "It worked!", "it didn't work...")
     testif(strB(1234,10) == "1234", "input1234/base16", "It worked!", "it didn't work...")
     testif(strB(100,16) == "64", "input100/base16", "It worked!", "it didn't work...")
@@ -71,6 +78,7 @@ def main():
 
 
 def Cnk_m(n,k):
+    """ returns the value of a the binomial coefficient using memoization """
     if n not in diction:
         diction[n] = {}
     if k not in diction[n]:
@@ -82,6 +90,9 @@ def Cnk_m(n,k):
 diction ={}
 
 def make_pairs(seq1,seq2):
+    """takes two lists a parameters and returns a list with 
+    all tuples where both lists have a element at a matching index
+    """
     if len(seq1) == 0 or len(seq2) == 0:
         return []
     else:
@@ -89,4 +100,5 @@ def make_pairs(seq1,seq2):
         var2 = make_pairs(seq1[1:],seq2[1:])
         return [var1] + var2
 
-main()
+if __name__ == "__main__":
+    main()

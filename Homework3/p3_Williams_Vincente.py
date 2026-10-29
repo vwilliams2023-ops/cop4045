@@ -254,7 +254,10 @@ class Predator(Animal):
                 self.starve_clock=self.starve_time
                 self.moved=True
 class Human(Animal):
+    """ animal sub class human that creates human objects"""
     def __init__(self, island, x=0, y=0, s="H"):
+        """constructor that references the island, starts at x=0, y=0 with a 
+        character symbol of H"""
         Animal.__init__(self, island, x, y, s)
         self.hunt_clock = self.hunt_time
         self.starve_clock = self.starve_time
@@ -352,4 +355,5 @@ def main(predator_breed_time=4, predator_starve_time=6, human_hunt_time=2, human
     plt.show()
     print(isle)
 
-main()
+if __name__ == "__main__":
+    main()
